@@ -1,0 +1,58 @@
+<form class="employee-form" [formGroup]="employeeForm">
+    <mat-dialog-action align='end' *ngIf='this.data'>
+        <button mat-raised-button color='warn' [mat-dialog-close]='true' cdkFocusInitial (click)='deleteEmployee()'>
+            Delete </button>
+    </mat-dialog-action>
+
+    <mat-form-field class='employee-full-width'>
+        <mat-label> Name </mat-label>
+        <input matInput placeholder="EX. Sujit, subodh" name='name' id='name' formControlName='name'>
+    </mat-form-field>
+
+    <mat-form-field class='employee-full-width'>
+        <mat-label> Address </mat-label>
+        <input matInput placeholder="EX. 123, kalyani nagar, Pune" name='address' id='address'
+            formControlName='address'>
+    </mat-form-field>
+
+
+    <mat-form-field class='employee-full-width'>
+        <mat-label> Email Address </mat-label>
+        <input matInput placeholder="EX. John@ABC.com" name='emailAddress' id='emailAddress'
+            formControlName='emailAddress'>
+    </mat-form-field>
+
+    <mat-form-field class='employee-full-width'>
+        <mat-label> Email Address </mat-label>
+        <input matInput placeholder="EX. John@ABC.com" name='emailAddress' id='emailAddress'
+            formControlName='emailAddress'>
+    </mat-form-field>
+
+    <mat-form-field class='employee-full-width'>
+        <mat-label> Phone Number </mat-label>
+        <input matInput placeholder="EX. 1234567890" name='phoneNumber' id='phoneNumber' formControlName='phoneNumber'>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="picker" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+    <input class="ng-hide" id="input-file-id" multiple type="file" name="file" id="file" formControlName="file"
+        (change)="fileChange($event)" />
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="true" *ngIf="!this.data" cdkFocusInitial type="submit"
+            (click)="createEmployee()">Create</button>
+        <button mat-button [mat-dialog-close]="true" *ngIf="this.data" cdkFocusInitial type="submit"
+            (click)="updateEmployee()">Update</button>
+    </mat-dialog-actions>
+
+
+
+
+</form>

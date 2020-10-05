@@ -1,0 +1,16 @@
+<br />
+<div style="margin-left: 50px;">
+  <button style="height: 48px;width: 120px;" mat-raised-button color="primary" (click)="openDialog()">Create
+    Recipe</button>
+  <mat-form-field style="margin-left: 250px;" appearance="outline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="search" placeholder="search here" (change)="searchByName()" [(ngModel)]="search"
+      class="search-input">
+  </mat-form-field>
+  <button (click)="searchByName()" style=" height: 48px;padding-top: 9px;width: 90px;" mat-raised-button
+    color="accent">Search</button>
+</div>
+
+<br />
+<mat-divider></mat-divider>
+
