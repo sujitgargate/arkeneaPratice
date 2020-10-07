@@ -1,0 +1,38 @@
+**************************************Employee app***********************
+
+--------------------------------------missing field populating -
+--------------------------------------images is not getting displayed while editing,
+-------------------------------------------calander is not showing date
+
+------------------------------------------image should get deleted if user changes image
+
+dialogue box for deleting 
+
+preview image while updating employee data
+
+-----------------------------------employee data should be displayed in tables
+
+-------------------------------------------phone number validation
+
+After adding or delteing or updating employee date , 
+the message should be displayed that updated sucessfully
+
+if wrong file type is choosen then it should display wrong file selected
+
+------------------------------------------change birthdate to birthday
+
+------------------------------------------change date format
+
+---------------------------------------header of table should be bold
+
+**************************************Recipe app**********************
+
+description box should be in rich editior
+
+Missing lot of fields
+
+add button for ingradients where ingradients are added with weight eg - chicken 400 GM
+
+uniqueNess in recipe name eg - chicken tikka cant be added again if it is there
+
+header of table should be bold
