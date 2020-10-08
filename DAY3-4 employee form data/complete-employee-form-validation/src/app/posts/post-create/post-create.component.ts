@@ -14,7 +14,7 @@ import { mimeType } from "./mime-type.validator";
 export class PostCreateComponent implements OnInit {
   maxDate = new Date();
 
-  displayAlertCreateEmployee = undefined;
+  displayAlertOnCreateEmployee = undefined;
 
   post: Post;
   isLoading = false;
@@ -44,10 +44,12 @@ export class PostCreateComponent implements OnInit {
         validators: [Validators.required, Validators.pattern("[0-9]{10}")],
       }),
 
-      imageFile :  new FormControl(null, {
-        validators: [Validators.required, this.postsService.fileExtensionValidator('jpg, png, wav, mp4')],
+      imageFile: new FormControl(null, {
+        validators: [
+          Validators.required,
+          this.postsService.fileExtensionValidator("jpg, png"),
+        ],
       }),
-
     });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -73,7 +75,7 @@ export class PostCreateComponent implements OnInit {
             name: postData.name,
             email: postData.email,
             birthdate: postData.birthdate,
-            image: this.post.imagePath,
+            image: this.post.imagePath, //this might case problem change image ->>>> imagePath
             phoneNumber: this.post.phoneNumber,
             address: this.post.address,
           });
@@ -98,8 +100,6 @@ export class PostCreateComponent implements OnInit {
 
   onSavePost() {
     if (this.form.invalid) {
-      console.log("Invalid form>>>>>>>>>");
-
       return;
     }
 
@@ -108,9 +108,9 @@ export class PostCreateComponent implements OnInit {
 
     if (this.mode === "create") {
       console.log("inside if create component>>>>>>>>>>>>>>>>>>");
-      this.displayAlertCreateEmployee = true;
+      //this.displayAlertOnCreateEmployee = true;
 
-      console.log(this.displayAlertCreateEmployee);
+      this.postsService.getStatus();
 
       this.postsService.addPost(
         this.form.value.name,
@@ -123,7 +123,6 @@ export class PostCreateComponent implements OnInit {
     } else {
       console.log("inside else", this.form);
 
-      this.displayAlertCreateEmployee = true;
       this.postsService.updatePost(
         this.postId,
         this.form.value.name,
@@ -145,7 +144,7 @@ export class PostCreateComponent implements OnInit {
     return this.form.get("phoneNumber");
   }
 
-
-
-
+  get imageStatus() {
+    return this.form.get("image");
+  }
 }

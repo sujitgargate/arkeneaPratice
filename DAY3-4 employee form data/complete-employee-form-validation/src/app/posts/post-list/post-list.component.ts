@@ -14,10 +14,7 @@ import { ConfirmDialogComponent } from "../../confirmation-dialog/confirmation-d
   styleUrls: ["./post-list.component.css"],
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  constructor(
-    public postsService: PostsService,
-    public dialog: MatDialog,
-  ) {}
+  constructor(public postsService: PostsService, public dialog: MatDialog) {}
 
   data: any;
   dataSource: Object;
@@ -32,8 +29,9 @@ export class PostListComponent implements OnInit, OnDestroy {
 
   //Employee:any= [];
 
-  displayAlertDeleteEmployee = false;
-  displayAlertCreateEmployee = false;
+  displayAlertOnDeleteEmployee = false;
+  displayAlertOnCreateEmployee = false;
+  displayAlertOnUpdateEmployee = false;
 
   posts: Post[] = [];
   isLoading = false;
@@ -68,7 +66,7 @@ export class PostListComponent implements OnInit, OnDestroy {
     confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.postsService.deletePost(postId);
-        this.displayAlertDeleteEmployee = true;
+        this.displayAlertOnDeleteEmployee = true;
       }
     });
   }
@@ -91,7 +89,7 @@ export class PostListComponent implements OnInit, OnDestroy {
 
       dialogRef.afterClosed().subscribe((result) => {
         console.log(`Dialog result: ${result}`);
-        this.displayAlertCreateEmployee = true;
+        this.displayAlertOnUpdateEmployee = true;
       });
     });
   }

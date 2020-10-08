@@ -6,8 +6,10 @@ import { Router } from "@angular/router";
 
 import { Post } from "./post.model";
 
-import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { ValidatorFn, AbstractControl } from "@angular/forms";
 
+var displayAlertOnUpdate: boolean = false;
+var displayAlertOnAdd: boolean = false;
 
 @Injectable({ providedIn: "root" })
 export class PostsService {
@@ -19,8 +21,6 @@ export class PostsService {
   private posts: Post[] = [];
 
   private postsUpdated = new Subject<Post[]>();
-
-  displayAlert : boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -73,9 +73,10 @@ export class PostsService {
     address: string
   ) {
     const postData = new FormData();
-    this.displayAlert = true
 
-    console.log("postData>>", postData);
+    displayAlertOnAdd = true;
+
+    //console.log("postData>>", postData);
 
     postData.append("name", name);
     postData.append("email", email);
@@ -114,7 +115,9 @@ export class PostsService {
     phoneNumber: string,
     address: string
   ) {
-    this.displayAlert = true
+
+    displayAlertOnUpdate = true;
+
     let postData: Post | FormData;
     if (typeof image === "object") {
       postData = new FormData();
@@ -158,7 +161,7 @@ export class PostsService {
   }
 
   deletePost(postId: String) {
-    console.log('inside delete post services');
+    console.log("inside delete post services");
 
     this.http
       .delete("http://localhost:3000/api/posts/" + postId)
@@ -166,27 +169,29 @@ export class PostsService {
         const updatedPosts = this.posts.filter((post) => post.id !== postId);
         this.posts = updatedPosts;
         this.postsUpdated.next([...this.posts]);
-        console.log('updated post ', updatedPosts);
-
+        console.log("updated post ", updatedPosts);
       });
   }
 
-
   //file extension validation function
 
-fileExtensionValidator(validExt: string): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    let forbidden = true;
-    if (control.value) {
-      const fileExt = control.value.split('.').pop();
-      validExt.split(',').forEach(ext => {
-        if (ext.trim() == fileExt) {
-          forbidden = false;
-        }
-      });
-    }
-    return forbidden ? { 'inValidExt': true } : null;
-  };
-}
+  fileExtensionValidator(validExt: string): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      let forbidden = true;
+      if (control.value) {
+        const fileExt = control.value.split(".").pop();
+        validExt.split(",").forEach((ext) => {
+          if (ext.trim() == fileExt) {
+            forbidden = false;
+          }
+        });
+      }
+      return forbidden ? { inValidExt: true } : null;
+    };
+  }
+
+  getStatus(){
+    return displayAlertOnAdd;
+  }
 
 }

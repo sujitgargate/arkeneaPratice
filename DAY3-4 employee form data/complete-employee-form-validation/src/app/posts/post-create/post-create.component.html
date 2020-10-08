@@ -13,10 +13,10 @@
       <mat-error *ngIf="email.invalid && email.touched">Email is invalid.</mat-error>
     </mat-form-field>
 
-
     <mat-form-field>
       <input matInput required type="phoneNumber" formControlName="phoneNumber" placeholder="phoneNumber">
-      <mat-error ngModel pattern="[0-9]*" *ngIf="phoneNumber.invalid && phoneNumber.touched"> Phone Number is invalid.</mat-error>
+      <mat-error ngModel pattern="[0-9]*" *ngIf="phoneNumber.invalid && phoneNumber.touched"> Phone Number is invalid.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -24,7 +24,7 @@
       <mat-error *ngIf="form.get('address').invalid">Please enter Address.</mat-error>
     </mat-form-field>
 
-<!--
+    <!--
     <mat-form-field class="example-full-width">
       <input type="date" matInput required [max]="maxDate" [matDatepicker]="picker" formControlName="birthdate"
         placeholder="Choose birth day">
@@ -35,25 +35,43 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Choose Birthday</mat-label>
-      <input matInput required [matDatepicker]="picker" name="birthdate" id="birthdate"
-        formControlName="birthdate">
+      <input matInput required [matDatepicker]="picker" name="birthdate" id="birthdate" formControlName="birthdate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <div>
+    <!-- <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
-      <input  type="file" #filePicker (change)="onImagePicked($event)" formControlName="imageFile" name="imageFile" id="imageFile">
+      <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="image" name="image" id="image">
+      <mat-error *ngIf="form.get('image').invalid">Please Upload image in JPEG, JPG, PNG format .</mat-error>
+
     </div>
 
+    <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+      <img [src]="imagePreview" [alt]="form.value.name">
+    </div> -->
+
+    <div>
+      <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
+      <input type="file" #filePicker (change)="onImagePicked($event)" formControlName="imageFile" name="imageFile"
+        id="imageFile">
+      <mat-error *ngIf="form.get('imageFile').invalid">Please Upload image in JPEG, JPG, PNG format.</mat-error>
+
+    </div>
 
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.name">
     </div>
 
+
+
+
+
+
+
     <button mat-raised-button color="accent" type="submit">Save</button>
 
-    <div *ngIf="displayAlertCreateEmployee" class="alert alert-primary" role="alert">
+    <div *ngIf="displayAlertOnCreateEmployee" class="alert alert-primary" role="alert">
 
       <strong>Employee Created sucessfully!</strong>
     </div>
